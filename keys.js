@@ -4,8 +4,6 @@ exports.spotify = {
   id: process.env.SPOTIFY_ID,
   secret: process.env.SPOTIFY_SECRET
 };
-
-
-var spotify = new Spotify(keys.spotify);
-
-var command = process.argv[2];
+exports.bandintown = {
+  app_id: "codingbootcamp"
+}
