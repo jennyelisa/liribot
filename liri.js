@@ -1,5 +1,7 @@
 require("dotenv").config();
 var request = require('request');
+var file = require('file-system');
+var fs = require('fs');
 var keys = require("./keys.js"); //imports keys.js 
 var axios = require("axios");
 var Spotify = require('node-spotify-api');
@@ -8,12 +10,18 @@ var spotify = new Spotify({
   secret: 'cf09975ccf414dc89d8b5702c05f7d7c'
 });
 var bandName= '';
-var command = process.argv[2]
+var artist= '';
+var movieInput= process.argv[3];
+
+
+
+
+var command = process.argv[2];
 console.log(process.argv)
 
    if (command === "concert-this") {
     //    console.log("if statement here")
-       console.log(artistName)
+    //    console.log(artist)
        bandInTownAPI()
        return;
    }
@@ -30,19 +38,23 @@ console.log(process.argv)
 
 //BandsInTown API. The user will use terminal to enter: node liri.js concert-this <artist/band name here>. This should give them the name of the venue, location of the venue and date of the event. 
 function bandInTownAPI(){
-var artist= '';
-var queryUrl= "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
 for (let i = 3; i < process.argv.length; i++) {
-    artist += process.argv[i];
-}
+    artist += process.argv[i] + " "
+};
+console.log(artist);
+let newArtistName = artist.trim();
+console.log(newArtistName);
+
+var queryUrl= "https://rest.bandsintown.com/artists/"+newArtistName+"/events?app_id=codingbootcamp";
+
 
 axios.get(queryUrl)
 .then(function(response) {
-    // console.log(response.data)
-    
+    console.log(response.data)
+
     for(let i=1; i<6; i++) {
     console.log("-----------------")
-    console.log("Artist/Band Name: " + artist)
+    console.log("Artist/Band Name: " + newArtistName);
     console.log("Name of Venue: " + response.data[i].venue.name);
     console.log("Location of Venue: " + response.data[i].venue.city);
     console.log("Date of Event: " + response.data[i].datetime);
@@ -56,9 +68,10 @@ axios.get(queryUrl)
 });
 };
 
+
 //OMDB API with Axios. In terminal using node user should be able to enter: node liri.js movie-this "<movie name here>". This will the return and log the: Title of the movie, Year it came out, IMBD rating, Rotten tomatoes Rating, Country of production, movie Language, Plot, and Actors in the movie. If nothing this typed in after node liri.js movie-this then Mr. Nobody will be returned and displayed. 
 function omdbAPI() {
-var movieInput= process.argv[3];
+
 var queryUrl = "http://www.omdbapi.com/?t=" + movieInput + "&y=&plot=short&apikey=trilogy";
 
 axios.get(queryUrl)
@@ -101,11 +114,32 @@ console.log(bandName)
        }
      console.log("Artist Name: " + data.tracks.items[0].artists[0].name);
      console.log("Song Name: " +data.tracks.items[0].name)
-     console.log("Preview Link to Song: " + data.tracks.items[0].external_urls)
+     console.log("Preview Link to Song: " + data.tracks.items[0].preview_url)
      console.log("Album the song is from: " + data.tracks.items[0].album.name)
 
      });
 
    }
 
+function doIt() {
+    for (let i = 3; i < process.argv.length; i++) {
+        artist += process.argv[i] + " "
+    };
+
+   fs.readFile("random.txt", "utf8", function(error, data) {
+
+       if(error) {
+           return console.log(error);
+       }
+
+       console.log(data);
+
+       var dataArr = data.split(',');
+       artist= dataArr[1];
+       command = dataArr[0];
+       dataArr.push(data);
+       console.log(dataArr);
+
+   });
+};
 
