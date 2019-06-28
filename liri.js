@@ -1,6 +1,5 @@
 require("dotenv").config();
 var request = require('request');
-var file = require('file-system');
 var fs = require('fs');
 var keys = require("./keys.js"); //imports keys.js 
 var axios = require("axios");
@@ -12,6 +11,7 @@ var spotify = new Spotify({
 var bandName= '';
 var artist= '';
 var movieInput= process.argv[3];
+var command = '';
 
 
 
@@ -121,25 +121,24 @@ console.log(bandName)
 
    }
 
-function doIt() {
-    for (let i = 3; i < process.argv.length; i++) {
-        artist += process.argv[i] + " "
-    };
+//the command <do-what-it-says> should return whatever command is currently in the random.txt file. Currently in the random.txt file is says spotify-this, "I Want it That Way". The <do-what-it-says> command will then grab the var dataArr and will run the spotify-this and then will search the song name, "I Want it That Way". This was read from the random.txt file by using fs.readFile. It would then call on the Spotify API to run, as if they user the spotify-this-song command.
 
-   fs.readFile("random.txt", "utf8", function(error, data) {
+   
 
-       if(error) {
-           return console.log(error);
-       }
+fs.readFile("random.txt", "utf8", function(error, data) {
+var dataArr = data.split(',')[0];
+command = data.split(',')[1];
+var combo = dataArr + command;
+console.log(dataArr); 
+console.log(command);
+console.log(combo);
 
-       console.log(data);
+if (process.argv[2] === combo) {
+console.log("yes");
+} else {
+    console.log("nahh");
+}
+  
+ });
 
-       var dataArr = data.split(',');
-       artist= dataArr[1];
-       command = dataArr[0];
-       dataArr.push(data);
-       console.log(dataArr);
-
-   });
-};
 

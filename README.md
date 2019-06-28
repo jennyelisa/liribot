@@ -10,3 +10,8 @@ The first command will be <concert-this>. BandsInTown API. The user will use ter
 
 // Spotify API. in node user should be about to enter: node liri.js spotify-this-song +"song name here"
 // this will then log in terminal the: Artist, The song's name, a preview link of the song from Spotify, and the album that the song is from. If no song is returned terminal should  default to "The Sign" by Ace of Base
+
+//the command <do-what-it-says> should return whatever command is currently in the random.txt file. Currently in the random.txt file is says spotify-this, "I Want it That Way". The <do-what-it-says> command will then grab the var dataArr and will run the spotify-this and then will search the song name, "I Want it That Way". This was read from the random.txt file by using fs.readFile. It would then call on the Spotify API to run, as if they user the spotify-this-song command.
+
+
+link to images 
