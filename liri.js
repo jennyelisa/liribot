@@ -113,9 +113,9 @@ console.log(bandName)
          return console.log('Error occurred: ' + err);
        }
      console.log("Artist Name: " + data.tracks.items[0].artists[0].name);
-     console.log("Song Name: " +data.tracks.items[0].name)
-     console.log("Preview Link to Song: " + data.tracks.items[0].preview_url)
-     console.log("Album the song is from: " + data.tracks.items[0].album.name)
+     console.log("Song Name: " +data.tracks.items[0].name);
+     console.log("Preview Link to Song: " + data.tracks.items[0].preview_url);
+     console.log("Album the song is from: " + data.tracks.items[0].album.name);
 
      });
 
