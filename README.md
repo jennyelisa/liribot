@@ -14,4 +14,5 @@ The first command will be <concert-this>. BandsInTown API. The user will use ter
 //the command <do-what-it-says> should return whatever command is currently in the random.txt file. Currently in the random.txt file is says spotify-this, "I Want it That Way". The <do-what-it-says> command will then grab the var dataArr and will run the spotify-this and then will search the song name, "I Want it That Way". This was read from the random.txt file by using fs.readFile. It would then call on the Spotify API to run, as if they user the spotify-this-song command.
 
 
-link to images 
+link to images:
+https://docs.google.com/document/d/1ZAFp5PeUnqHiF3PmqIK04Bx7RCf_gZyncC2wasn5iMc/edit?usp=sharing
